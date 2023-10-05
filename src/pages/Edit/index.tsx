@@ -15,8 +15,8 @@ export default function Edit() {
             version: 'v1',
             // require 需要配置的项目
             props: {
-                content: '测试测试',
-                color: 'skyblue'
+                content: {label:'内容',value:'一段文本'},
+                color: {label:'颜色',value:'skyblue'}
             }
         },
         {
@@ -25,8 +25,8 @@ export default function Edit() {
             icon: 'http://43.140.197.245:7890/uploads/2297a5d8b9e067126dacb7a3a0558c28',
             version: 'v1',
             props: {
-                content: '测试测试',
-                color: 'red'
+                content: {label:'内容',value:'点击确定'},
+                color: {label:'颜色',value:'skyblue'}
             }
         }
     ])
@@ -66,7 +66,7 @@ export default function Edit() {
         
         // components[currComponentIndex].props[key] = value
         const newComponents = [...components]
-        newComponents[currComponentIndex].props[key] = value
+        newComponents[currComponentIndex].props[key].value = value
         setComponents(newComponents)        
         console.log(key,value)
     }
@@ -94,18 +94,20 @@ export default function Edit() {
                         setCurrComponent={setCurrComponent}>
                     </ComponentList>
                 </div>
+
                 <div className='right'>
                     {
                        FromDslConfig && Object.keys(FromDslConfig).map((key,index)=><div key={index}>
 
                         <div>
-                            <span>{key}</span>:<input onChange={(e)=>{change(key,e.target.value)}}></input>
+                            <span>{FromDslConfig[key].label}</span>:<input value={FromDslConfig[key].value} onChange={(e)=>{change(key,e.target.value)}}></input>
                         </div>
 
                        </div>)
                     }
                     
                 </div>
+
             </div>
 
         </div>
